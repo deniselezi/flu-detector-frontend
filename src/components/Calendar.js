@@ -18,10 +18,9 @@ function Calendar({ onDateRangeChange }) {
 
   return (
     <div>
-      <h5>Data Filtering</h5>
-      <div>
+      <h3 className="text-lg font-semibold">Date filtering</h3>
+      <div className="flex flex-col space-y-2 mt-4">
         <DatePicker
-          showIcon
           selected={startDate}
           onChange={(date) => setStartDate(date)}
           startDate={startDate}
@@ -32,7 +31,6 @@ function Calendar({ onDateRangeChange }) {
         />
         <span>to</span>
         <DatePicker
-          showIcon
           selected={endDate}
           onChange={(date) => setEndDate(date)}
           startDate={startDate}

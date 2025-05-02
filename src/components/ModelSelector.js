@@ -2,24 +2,39 @@ import React from "react";
 import Form from 'react-bootstrap/Form';
 
 const models = [
-    "Lasso",
-    "FFNN",
-    "RNN (GRU)"
+  "lasso",
+  "ffnn",
+  "rnn"
 ];
 
-const ModelSelector = ({ selectedModel, setSelectedModel }) => {
+const modelDisplayNames = {
+  lasso: "Lasso",
+  ffnn: "FFNN",
+  rnn: "RNN (GRU)"
+};
+
+const ModelSelector = ({ selectedModels, setSelectedModels }) => {
+  const toggleModel = (model) => {
+    if (selectedModels.includes(model)) {
+      setSelectedModels(selectedModels.filter((m) => m !== model));
+    } else {
+      setSelectedModels([...selectedModels, model]);
+    }
+  };
+
   return (
     <Form>
-      <h2 className="text-lg font-semibold text-center mb-2">Select model</h2>
-      <div className="flex flex-col space-y-2">
+      <h3 className="text-lg font-semibold">Select models to visualise</h3>
+      <div className="flex flex-col space-y-2 mt-4">
         {models.map((model) => (
-        <Form.Check // prettier-ignore
-        type="radio"
-        id={`${model}-radio`}
-        label={model}
-        checked={selectedModel === model}
-        onChange={() => setSelectedModel(model)}
-        />
+          <Form.Check
+            key={model}
+            type="checkbox"
+            id={`${model}-checkbox`}
+            label={modelDisplayNames[model]}
+            checked={selectedModels.includes(model)}
+            onChange={() => toggleModel(model)}
+          />
         ))}
       </div>
     </Form>
